@@ -1,16 +1,10 @@
-# add_it
+# Add IT
 
-A new Flutter application.
+A daily expense tracker app using sql and flutter.
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Who doesn\'t want to keep a track of how much money they spend on each day but because of lack of proper resources we cannot record everything as we spend it and this results in incomplete and unreliable report.
+        \n\nThis app makes this task much easier for you as you just have to add the amount being spent on the go and it automatically combines it for a single day and also keeps track of a month-wise record.
+        \So that you can be your own accountant at just a tap of a button.\n\nIt also has Pictorial representation to enhance the user experience.
+        \n
