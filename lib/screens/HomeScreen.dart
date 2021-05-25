@@ -14,6 +14,7 @@ import 'package:add_it/utilities/SlidableTileDay.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_item/multi_select_item.dart';
 
@@ -207,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.pop(context);
         },
       );
-    } else {
+    } else if (selected == Constants.setLimit) {
       if (int.parse(limitController.dayLimit.value) != -1) {
         dayLimitController.text = limitController.dayLimit.value;
         monthLimitController.text = limitController.monthLimit.value;
@@ -219,6 +220,12 @@ class _HomeScreenState extends State<HomeScreen> {
           return setDialog();
         },
       );
+    } else if (selected == Constants.contactUs) {
+      var email = Email(
+        recipients: ['anubhavprasad89@gmail.com'],
+      );
+      await FlutterEmailSender.send(email);
+      print('Sent');
     }
   }
 
