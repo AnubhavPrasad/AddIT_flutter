@@ -27,21 +27,29 @@ class _PieChartScreenState extends State<PieChartScreen> {
       ),
       body: Container(
         padding: EdgeInsets.all(20),
-        child: PieChart(
-          PieChartData(
-            pieTouchData: PieTouchData(
-              enabled: true,
-              touchCallback: (pieTouchResponse) {
-                setState(
-                  () {
-                    touchedIndex =
-                        pieTouchResponse.touchedSection.touchedSectionIndex;
+        child: Stack(
+          children: [
+            PieChart(
+              PieChartData(
+                pieTouchData: PieTouchData(
+                  enabled: true,
+                  touchCallback: (pieTouchResponse) {
+                    setState(
+                      () {
+                        touchedIndex =
+                            pieTouchResponse.touchedSection.touchedSectionIndex;
+                      },
+                    );
                   },
-                );
-              },
+                ),
+                sections: showSections(widget.itemList),
+              ),
             ),
-            sections: showSections(widget.itemList),
-          ),
+            Align(
+              child: Text(widget.itemList[0][DataBaseHelper.itemDateCol]),
+              alignment: Alignment.center,
+            )
+          ],
         ),
       ),
     );
@@ -53,7 +61,7 @@ class _PieChartScreenState extends State<PieChartScreen> {
         .map(
           (index, data) {
             final bool isTouched = touchedIndex == index;
-            final radius = isTouched ? 120 : 110;
+            final radius = isTouched ? 110 : 100;
             final size = isTouched ? 15 : 13;
             final value = PieChartSectionData(
                 color: colors[index % 8],
