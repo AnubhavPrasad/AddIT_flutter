@@ -8,6 +8,7 @@ import 'package:add_it/database/DataBaseHelper.dart';
 import 'package:add_it/models/MenuConstants.dart';
 import 'package:add_it/screens/AboutScreen.dart';
 import 'package:add_it/screens/MonthWiseTabScreen.dart';
+import 'package:add_it/theme/ThemeService.dart';
 import 'package:add_it/utilities/AddBottomSheet.dart';
 import 'package:add_it/utilities/ItemListTile.dart';
 import 'package:add_it/utilities/SlidableTileDay.dart';
@@ -67,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onSelected: (choice) {
                   choiceAction(choice, context);
                 },
-                itemBuilder: (_) => Constants.choices
+                itemBuilder: (_) => MenuConstants.choices
                     .map(
                       (choice) => PopupMenuItem(
                         child: Text(choice),
@@ -98,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  //day wise tab screen
   WillPopScope dayWiseScreen() {
     return WillPopScope(
       //to deselect all days when back is pressed
@@ -180,9 +182,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   //Menu choice actions
   void choiceAction(String selected, context) async {
-    if (selected == Constants.about) {
+    if (selected == MenuConstants.about) {
       Get.to(AboutScreen());
-    } else if (selected == Constants.pickDate) {
+    } else if (selected == MenuConstants.pickDate) {
       final picked = await showDatePicker(
         context: context,
         initialDate: menuController.selectedDate.value,
@@ -198,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         );
       }
-    } else if (selected == Constants.deleteAll) {
+    } else if (selected == MenuConstants.deleteAll) {
       dialogDisplay(
         'Delete All',
         () {
@@ -208,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.pop(context);
         },
       );
-    } else if (selected == Constants.setLimit) {
+    } else if (selected == MenuConstants.setLimit) {
       if (int.parse(limitController.dayLimit.value) != -1) {
         dayLimitController.text = limitController.dayLimit.value;
         monthLimitController.text = limitController.monthLimit.value;
@@ -220,15 +222,18 @@ class _HomeScreenState extends State<HomeScreen> {
           return setDialog();
         },
       );
-    } else if (selected == Constants.contactUs) {
+    } else if (selected == MenuConstants.contactUs) {
       var email = Email(
         recipients: ['anubhavprasad89@gmail.com'],
       );
       await FlutterEmailSender.send(email);
       print('Sent');
+    } else if (selected == MenuConstants.changeTheme) {
+      ThemeService().changeThemeMode();
     }
   }
 
+  //dialog to set limit
   SimpleDialog setDialog() {
     return SimpleDialog(
       title: Center(
@@ -286,7 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-// set limit for day and month by using limit controller
+  // set limit for day and month by using limit controller
   addLimit() {
     var dayLimit = int.tryParse(dayLimitController.text);
     var monthLimit = int.tryParse(monthLimitController.text);

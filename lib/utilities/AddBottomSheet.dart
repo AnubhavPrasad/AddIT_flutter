@@ -24,7 +24,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[300],
+      color: Get.isDarkMode ? Color(0xFF2B2B2B) : Colors.grey[300],
       child: Column(
         children: [
           Stack(

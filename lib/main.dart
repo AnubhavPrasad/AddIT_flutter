@@ -1,24 +1,18 @@
+import 'package:add_it/theme/ThemeService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
+import 'package:add_it/theme/themes.dart';
+import 'package:get_storage/get_storage.dart';
 import 'screens/HomeScreen.dart';
 
-void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark
-      .copyWith(statusBarIconBrightness: Brightness.dark));
-
+void main() async {
+  await GetStorage.init();
   runApp(
     GetMaterialApp(
-      theme: ThemeData(
-        primaryColor: Color(0xff1e6091),
-        accentColor: Colors.white,
-        scaffoldBackgroundColor: Colors.grey[300],
-        colorScheme: ColorScheme.light(
-          primary: Color(0xff2d77ad),
-          secondary: Color(0xff94d0d2),
-        ),
-      ),
+      theme: Themes().lightTheme,
+      darkTheme: Themes().darkTheme,
+      themeMode: ThemeService().getThemeMode(),
       home: MyApp(),
       title: 'AddIT',
     ),

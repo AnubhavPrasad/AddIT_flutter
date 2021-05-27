@@ -38,6 +38,7 @@ dependencies:
   font_awesome_flutter: ^9.0.0
   flutter_launcher_icons: ^0.9.0
   flutter_email_sender: ^5.0.0
+  get_storage: ^2.0.2
 
 flutter_icons:
   android: "launcher_icon"
