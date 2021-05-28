@@ -94,6 +94,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                 textInputAction: TextInputAction.done,
                 onSubmitted: (value) {
                   addData();
+                  FocusScope.of(context).previousFocus();
                 },
                 onTap: () {
                   setState(() {

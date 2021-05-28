@@ -24,8 +24,14 @@ class BarChartScreen extends StatelessWidget {
                 border: Border(
                   top: BorderSide.none,
                   right: BorderSide.none,
-                  left: BorderSide(width: 1, color: Colors.grey[300]),
-                  bottom: BorderSide(width: 1, color: Colors.grey[300]),
+                  left: BorderSide(
+                      width: 1,
+                      color:
+                          Get.isDarkMode ? Colors.grey[300] : Colors.black54),
+                  bottom: BorderSide(
+                      width: 1,
+                      color:
+                          Get.isDarkMode ? Colors.grey[300] : Colors.black54),
                 ),
               ),
               barTouchData: BarTouchData(
@@ -43,8 +49,9 @@ class BarChartScreen extends StatelessWidget {
                     return BarTooltipItem(
                       rod.y.toInt().toString(),
                       TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                          fontWeight: FontWeight.bold,
+                          color:
+                              Get.isDarkMode ? Colors.grey[300] : Colors.black),
                     );
                   },
                 ),
@@ -54,7 +61,9 @@ class BarChartScreen extends StatelessWidget {
                 show: true,
                 leftTitles: SideTitles(
                   getTextStyles: (value) {
-                    return TextStyle(color: Colors.white, fontSize: 11);
+                    return TextStyle(
+                        color: Get.isDarkMode ? Colors.white : Colors.black,
+                        fontSize: 11);
                   },
                   showTitles: monthController.interval.value > 0 ? true : false,
                   interval: monthController.interval.value > 0
@@ -67,7 +76,9 @@ class BarChartScreen extends StatelessWidget {
                 bottomTitles: SideTitles(
                   showTitles: true,
                   getTextStyles: (value) {
-                    return TextStyle(color: Colors.white, fontSize: 11);
+                    return TextStyle(
+                        color: Get.isDarkMode ? Colors.white : Colors.black,
+                        fontSize: 11);
                   },
                   getTitles: (double value) {
                     switch (value.toInt()) {

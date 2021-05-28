@@ -16,7 +16,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:multi_select_item/multi_select_item.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -319,20 +321,57 @@ class _HomeScreenState extends State<HomeScreen> {
   showItems(index) async {
     await itemController
         .query(dayController.list[index][DataBaseHelper.dayFullDateCol]);
-    itemsInDayDialog(context);
+    itemsInDayDialog(context, index);
   }
 
-  itemsInDayDialog(context) {
+  itemsInDayDialog(context, index) {
     showDialog(
       context: context,
-      builder: (_) => Obx(
-        () => Dialog(
-          child: ListView.builder(
+      builder: (_) => Dialog(
+        child: Obx(
+          () => CustomScrollView(
             shrinkWrap: true,
-            itemCount: itemController.list.length,
-            itemBuilder: (_, i) => ItemListTile(
-              item: itemController.list[i],
-            ),
+            slivers: [
+              SliverStickyHeader(
+                header: Material(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          var date = DateFormat('dd-MM-yyyy').parse(
+                              dayController.list[index]
+                                  [DataBaseHelper.dayFullDateCol]);
+                          menuController.setDate(date);
+                          Get.bottomSheet(
+                            FractionallySizedBox(
+                              heightFactor: 0.8,
+                              child: AddBottomSheet(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          child: Center(
+                            child: Icon(Icons.add),
+                          ),
+                        ),
+                      ),
+                      Divider(
+                        height: 1,
+                      ),
+                    ],
+                  ),
+                ),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (context, i) => ItemListTile(
+                            item: itemController.list[i],
+                          ),
+                      childCount: itemController.list.length),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -369,7 +408,6 @@ class _HomeScreenState extends State<HomeScreen> {
   //Deduct dayValues from MonthTab
   deductMonth(Map m) async {
     var monthList = monthController.list;
-    print(m);
     for (var i in monthList) {
       if (m.containsKey(i[DataBaseHelper.monthCol])) {
         var row = {

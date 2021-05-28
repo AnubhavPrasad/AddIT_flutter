@@ -103,6 +103,9 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
                 child: TextField(
                   controller: priceEditController,
                   keyboardType: TextInputType.number,
+                  onSubmitted: (value) {
+                    editData();
+                  },
                   decoration: InputDecoration(
                       hintText: 'Enter Price',
                       errorText: validate ? 'Price is required' : null),
