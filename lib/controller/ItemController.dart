@@ -33,7 +33,7 @@ class ItemController extends GetxController {
   }
 
   query(String date) async {
-    List templist = await DataBaseHelper.instance.itemQuery(date);
-    list.value = templist.reversed.toList();
+    List tempList = await DataBaseHelper.instance.itemQuery(date);
+    list.value = tempList.reversed.toList();
   }
 }

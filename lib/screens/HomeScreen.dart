@@ -334,7 +334,7 @@ class _HomeScreenState extends State<HomeScreen> {
             slivers: [
               SliverStickyHeader(
                 header: Material(
-                  color: Colors.white,
+                  color: Theme.of(context).dialogBackgroundColor,
                   child: Column(
                     children: [
                       InkWell(
