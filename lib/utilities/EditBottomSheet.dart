@@ -25,6 +25,7 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
   TextEditingController itemEditController = TextEditingController();
   TextEditingController priceEditController = TextEditingController();
   int id;
+
 //putting values in text fields that need to be edited
   @override
   void initState() {
@@ -38,7 +39,7 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Get.isDarkMode ? Color(0xFF2B2B2B) : Colors.grey[300],
       child: Column(
         children: [
           Stack(
@@ -102,6 +103,9 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
                 child: TextField(
                   controller: priceEditController,
                   keyboardType: TextInputType.number,
+                  onSubmitted: (value) {
+                    editData();
+                  },
                   decoration: InputDecoration(
                       hintText: 'Enter Price',
                       errorText: validate ? 'Price is required' : null),

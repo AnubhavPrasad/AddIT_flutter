@@ -6,6 +6,7 @@ class ItemController extends GetxController {
 
   insert(Map<String, dynamic> row) async {
     int id = await DataBaseHelper.instance.itemInsert(row);
+    query(row[DataBaseHelper.itemDateCol]);
     return id;
   }
 
@@ -32,6 +33,7 @@ class ItemController extends GetxController {
   }
 
   query(String date) async {
-    list.value = await DataBaseHelper.instance.itemQuery(date);
+    List tempList = await DataBaseHelper.instance.itemQuery(date);
+    list.value = tempList.reversed.toList();
   }
 }

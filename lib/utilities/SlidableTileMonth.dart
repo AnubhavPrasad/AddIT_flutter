@@ -32,7 +32,7 @@ class SlidableTileMonth extends StatelessWidget {
               '\u20B9 ' + listData[DataBaseHelper.monthValueCol].toString(),
               style: TextStyle(
                   fontSize: 18,
-                  color: Colors.black87,
+                  color: Get.isDarkMode ? Colors.white : Colors.black87,
                   fontWeight: FontWeight.bold)),
         ),
       ),
