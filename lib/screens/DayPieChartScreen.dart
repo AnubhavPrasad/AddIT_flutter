@@ -5,16 +5,16 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PieChartScreen extends StatefulWidget {
+class DayPieChartScreen extends StatefulWidget {
   final itemList;
 
-  PieChartScreen({this.itemList});
+  DayPieChartScreen({this.itemList});
 
   @override
-  _PieChartScreenState createState() => _PieChartScreenState();
+  _DayPieChartScreenState createState() => _DayPieChartScreenState();
 }
 
-class _PieChartScreenState extends State<PieChartScreen> {
+class _DayPieChartScreenState extends State<DayPieChartScreen> {
   final ItemController itemController = Get.find();
   var touchedIndex = -1;
 

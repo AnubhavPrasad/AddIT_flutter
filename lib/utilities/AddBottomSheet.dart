@@ -23,6 +23,8 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    var dayDate =
+        DateFormat('dd-MM-yyyy').format(menuController.selectedDate.value);
     return Container(
       color: Get.isDarkMode ? Color(0xFF2B2B2B) : Colors.grey[300],
       child: Column(
@@ -44,7 +46,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                           Get.back();
                         }),
                     Text(
-                      'ADD',
+                      'ADD to $dayDate',
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     )
                   ],

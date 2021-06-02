@@ -3,7 +3,7 @@ import 'package:add_it/controller/ItemController.dart';
 import 'package:add_it/controller/LimitController.dart';
 import 'package:add_it/controller/MonthController.dart';
 import 'package:add_it/database/DataBaseHelper.dart';
-import 'package:add_it/screens/PieChartScreen.dart';
+import 'package:add_it/screens/DayPieChartScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -52,7 +52,7 @@ class SlidableTile extends StatelessWidget {
             onTap: () async {
               await itemController
                   .query(listData[DataBaseHelper.dayFullDateCol]);
-              Get.to(PieChartScreen(itemList: itemController.list));
+              Get.to(DayPieChartScreen(itemList: itemController.list));
             },
             child: Icon(FontAwesomeIcons.chartPie),
           ),
@@ -74,9 +74,9 @@ class SlidableTile extends StatelessWidget {
           icon: Icons.pie_chart_sharp,
           onTap: () async {
             await itemController.query(listData[DataBaseHelper.dayFullDateCol]);
-            Get.to(PieChartScreen(itemList: itemController.list));
+            Get.to(DayPieChartScreen(itemList: itemController.list));
           },
-        )
+        ),
       ],
     );
   }

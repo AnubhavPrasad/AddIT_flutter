@@ -2,6 +2,7 @@ import 'package:add_it/controller/DayController.dart';
 import 'package:add_it/controller/ItemController.dart';
 import 'package:add_it/controller/MonthController.dart';
 import 'package:add_it/database/DataBaseHelper.dart';
+import 'package:add_it/screens/MonthPieChartScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ class SlidableTileMonth extends StatelessWidget {
   final DayController dayController = Get.find();
   final ItemController itemController = Get.find();
   final color;
+
   SlidableTileMonth({this.listData, this.color});
 
   @override
@@ -29,11 +31,12 @@ class SlidableTileMonth extends StatelessWidget {
           title: Text(listData[DataBaseHelper.monthDateCol],
               style: TextStyle(fontSize: 12, color: Colors.grey[600])),
           subtitle: Text(
-              '\u20B9 ' + listData[DataBaseHelper.monthValueCol].toString(),
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Get.isDarkMode ? Colors.white : Colors.black87,
-                  fontWeight: FontWeight.bold)),
+            '\u20B9 ' + listData[DataBaseHelper.monthValueCol].toString(),
+            style: TextStyle(
+                fontSize: 18,
+                color: Get.isDarkMode ? Colors.white : Colors.black87,
+                fontWeight: FontWeight.bold),
+          ),
         ),
       ),
       secondaryActions: <Widget>[
@@ -64,6 +67,22 @@ class SlidableTileMonth extends StatelessWidget {
                 ],
               ),
             );
+          },
+        ),
+        IconSlideAction(
+          caption: 'Pie',
+          color: Colors.grey,
+          foregroundColor: Colors.white,
+          icon: Icons.pie_chart_sharp,
+          onTap: () async {
+            List dayList =
+                await dayController.query(listData[DataBaseHelper.monthCol]);
+            if (dayList.length > 0)
+              Get.to(
+                MonthPieChartScreen(
+                  dayList: dayList,
+                ),
+              );
           },
         ),
       ],
